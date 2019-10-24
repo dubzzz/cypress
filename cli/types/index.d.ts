@@ -1138,7 +1138,7 @@ declare namespace Cypress {
      * @example
      *    cy.request('http://dev.local/seed')
      */
-    request(url: string, body?: RequestBody): Chainable<Response>
+    request<T = any>(url: string, body?: RequestBody): Chainable<Response<T>>
     /**
      * Make an HTTP request with specific method.
      *
@@ -1146,7 +1146,7 @@ declare namespace Cypress {
      * @example
      *    cy.request('POST', 'http://localhost:8888/users', {name: 'Jane'})
      */
-    request(method: HttpMethod, url: string, body?: RequestBody): Chainable<Response>
+    request<T = any>(method: HttpMethod, url: string, body?: RequestBody): Chainable<Response<T>>
     /**
      * Make an HTTP request with specific behavior.
      *
@@ -1157,7 +1157,7 @@ declare namespace Cypress {
      *      followRedirect: false // turn off following redirects
      *    })
      */
-    request(options: Partial<RequestOptions>): Chainable<Response>
+    request<T = any>(options: Partial<RequestOptions>): Chainable<Response<T>>
 
     /**
      * Get the root DOM element.
@@ -4356,9 +4356,9 @@ declare namespace Cypress {
     consoleProps(): ObjectLike
   }
 
-  interface Response {
+  interface Response<T = any> {
     allRequestResponses: any[]
-    body: any
+    body: T
     duration: number
     headers: { [key: string]: string }
     isOkStatusCode: boolean
